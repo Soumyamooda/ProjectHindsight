@@ -105,6 +105,22 @@ def search_memory(query):
 
     return memories
 
+async def search_memory_async(query):
+    result = await client.arecall(
+        bank_id=BANK_ID,
+        query=query
+    )
+
+    memories = []
+
+    for memory in result.results:
+        memories.append({
+            "type": memory.type,
+            "text": memory.text
+        })
+
+    return memories
+
 
 def generate_hindsight(query):
 
